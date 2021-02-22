@@ -1,0 +1,33 @@
+{
+  "name": "catalyst-server",
+  "version": "0.0.5",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "watch": "cross-env NODE_ENV=development nodemon server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@types/chalk": "^2.2.0",
+    "@types/connect-livereload": "^0.5.31",
+    "@types/express-minify": "^0.1.34",
+    "@types/nodemon": "^1.19.0",
+    "chalk": "^4.1.0",
+    "connect-livereload": "^0.6.1",
+    "cross-env": "^7.0.3",
+    "dotenv": "^8.1.0",
+    "express": "^4.17.1",
+    "express-minify": "^1.0.0",
+    "heroku-ssl-redirect": "0.0.4",
+    "livereload": "^0.9.1",
+    "nodemon": "^2.0.6",
+    "socket.io": "^2.2.0",
+    "twilio": "^3.34.0"
+  },
+  "devDependencies": {
+    "prettier": "2.0.2"
+  }
+}
