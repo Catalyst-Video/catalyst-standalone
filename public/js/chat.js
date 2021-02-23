@@ -27,6 +27,7 @@ const localVideoText = $("#local-video-text");
 const captionButtontext = $("#caption-button-text");
 const entireChat = $("#entire-chat");
 const chatZone = $("#chat-zone");
+const headerLogo = $("#header");
 
 // Need a Map to keep track of dataChannel connecting with each peer
 var dataChannel = new Map();
@@ -45,7 +46,7 @@ if (urlParams.get("hide_chat") === "true") toggleChat();
 const joinMessage = urlParams.get("join_message");
 const hideJoinMessageCopyButton =
 	urlParams.get("hide_join_message_copy_button") === "true";
-// const siteName = urlParams.get("site_name");
+if (urlParams.get("hide_logo") === "true") headerLogo.fadeOut();
 
 // document.domain = siteName;
 
