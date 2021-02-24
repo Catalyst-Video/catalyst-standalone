@@ -27,6 +27,7 @@ const localVideoText = $("#local-video-text");
 const captionButtontext = $("#caption-button-text");
 const entireChat = $("#entire-chat");
 const chatZone = $("#chat-zone");
+const headerLogo = $("#header");
 
 // Need a Map to keep track of dataChannel connecting with each peer
 var dataChannel = new Map();
@@ -34,12 +35,22 @@ var dataChannel = new Map();
 // Expose sendToAllDataChannels to window (so it can be accessed by applications consuming it as an iframe)
 window.sendArbitraryData = data => sendToAllDataChannels(data);
 
+// forward post messaging from one parent to the other
+window.onmessage = function (e) {
+	if (e.data.type == "arbitraryData") {
+		sendToAllDataChannels(e.data);
+	}
+};
+
 // URL Param config
 const urlParams = new URLSearchParams(window.location.search);
 if (urlParams.get("hide_chat") === "true") toggleChat();
 const joinMessage = urlParams.get("join_message");
 const hideJoinMessageCopyButton =
 	urlParams.get("hide_join_message_copy_button") === "true";
+if (urlParams.get("hide_logo") === "true") headerLogo.fadeOut();
+
+// document.domain = siteName;
 
 var VideoChat = {
 	videoEnabled: true,
@@ -235,12 +246,8 @@ var VideoChat = {
 					// Arbitrary data handling
 					console.log("Received arbitrary data: ", receivedData);
 					document.getElementById("arbitrary-data").append(receivedData);
+					window.top.postMessage(receivedData, "*");
 				}
-			};
-			// forward post messaging from one parent to the other
-			window.onmessage = function (e) {
-				console.log(e.data);
-				window.top.postMessage(e.data, "*");
 			};
 
 			// Called when dataChannel is successfully opened
