@@ -37,7 +37,7 @@ window.sendArbitraryData = data => sendToAllDataChannels(data);
 
 // forward post messaging from one parent to the other
 window.onmessage = function (e) {
-	if (e.data.type == "arbitraryData") {
+	if (JSON.parse(e.data).type == "arbitraryData") {
 		sendToAllDataChannels(e.data);
 	}
 };
